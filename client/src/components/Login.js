@@ -47,7 +47,7 @@ const Login = () => {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Access-Control-Allow-Origin": "https://watch-ecomm-backend.onrender.com/",
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": "true",
       },
       credentials: "include",

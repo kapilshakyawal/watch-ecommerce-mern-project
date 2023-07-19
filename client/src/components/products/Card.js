@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-const imgUrl =
-  "https://assets.ajio.com/medias/sys_master/root/20230220/XrjS/63f3ad4cf997dde6f4b56dd8/-473Wx593H-4932390760-multi-MODEL.jpg";
 const Card = () => {
   const [Data, setData] = useState([]);
 

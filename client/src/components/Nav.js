@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Auth } from "../Auth";
 import { successToast } from "./Toast/Toasts";
 // bg-slate-900

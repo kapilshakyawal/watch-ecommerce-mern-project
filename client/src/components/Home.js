@@ -1,8 +1,5 @@
 import React from 'react'
 import Nav from './Nav'
-import Card from './products/Card'
-import AddProduct from './products/AddProduct'
-import Product_Details from './products/Product_Details'
 import HomeLandingPage from './HomeLandingPage'
 const Home = () => {
   return (

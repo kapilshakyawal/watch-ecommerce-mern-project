@@ -8,7 +8,7 @@ const cookieParser= require("cookie-parser")
 morgan(':method :url :status :res[content-length] - :response-time ms')
 app.use(express.json())
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', 'https://watch-ecomm-frontend.onrender.com/');
     next();
   });
 app.use(cors({

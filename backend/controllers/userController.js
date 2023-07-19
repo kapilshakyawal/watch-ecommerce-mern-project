@@ -37,6 +37,7 @@ exports.login = async (req, res) => {
       if (result) {
         const token = genToken(checkUser.email);
         res.header("Access-Control-Allow-Credentials", "true")
+        res.set("Access-Control-Allow-Origin" , "https://watch-ecomm-frontend.onrender.com/")
         res.status(200);
         res.cookie("token", token, {
           httpOnly: true,

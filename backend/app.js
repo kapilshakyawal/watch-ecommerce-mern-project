@@ -13,7 +13,7 @@ app.use(express.json())
 //     next();
 //   });
 app.use(cors({
-    origin: ["http://localhost:3000","https://watch-ecomm-frontend.onrender.com/"],
+    origin: ["http://localhost:3000",'https://watch-ecomm-frontend.onrender.com/'],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }))

@@ -17,7 +17,7 @@ app.use(cors({
     credentials: true,
   }))
   app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Origin", "https://watch-ecomm-frontend.onrender.com/");
     res.setHeader(
       "Access-Control-Allow-Methods",
       "OPTIONS, GET, POST, PUT, PATCH, DELETE"

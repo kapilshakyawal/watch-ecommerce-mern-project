@@ -12,11 +12,24 @@ app.use(express.json())
 //     res.header('Access-Control-Allow-Origin', 'https://watch-ecomm-frontend.onrender.com/');
 //     next();
 //   });
-app.use(cors({
-    origin: ["http://localhost:3000","https://watch-ecomm-frontend.onrender.com/"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  }))
+// app.use(cors({
+//     origin: ["http://localhost:3000","https://watch-ecomm-frontend.onrender.com/"],
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   }))
+const whitelist = ["https://watch-ecomm-frontend.onrender.com/"]
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
+  credentials: true,
+}
+app.use(cors(corsOptions))
+
 
 app.use(cookieParser())
 mongoose

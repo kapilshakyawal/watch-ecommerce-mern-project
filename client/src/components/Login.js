@@ -47,7 +47,7 @@ const Login = () => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:7000",
+        "Access-Control-Allow-Origin": "`${window.BACKEND_URL}",
         "Access-Control-Allow-Credentials": "true",
       },
       credentials: "include",

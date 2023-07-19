@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
     bcrypt.compare(password, checkUser.password, function (err, result) {
       if (result) {
         const token = genToken(checkUser.email);
-        // res.header("Access-Control-Allow-Credentials", "true")
+        res.header("Access-Control-Allow-Credentials", "true")
         res.status(200);
         res.cookie("token", token, {
           httpOnly: true,

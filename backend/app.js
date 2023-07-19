@@ -17,18 +17,7 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }))
-//   app.use((req, res, next) => {
-//     res.setHeader("Access-Control-Allow-Origin", "https://watch-ecomm-frontend.onrender.com/");
-//     res.setHeader(
-//       "Access-Control-Allow-Methods",
-//       "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-//     );
-//     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//     if (req.method === "OPTIONS") {
-//       return res.sendStatus(200);
-//     }
-//     next();
-//   });
+
 app.use(cookieParser())
 mongoose
 .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })

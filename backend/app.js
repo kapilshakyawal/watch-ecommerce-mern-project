@@ -13,7 +13,7 @@ app.use(express.json())
 //     next();
 //   });
 app.use(cors({
-    origin: ['https://watch-ecomm-frontend.onrender.com/'],
+    origin: ['https://watch-ecommerce-mern-project.vercel.app/login'],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }))

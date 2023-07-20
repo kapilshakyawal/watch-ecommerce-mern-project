@@ -9,13 +9,19 @@ const bodyParsr = require("body-parser");
 // morgan(':method :url :status :res[content-length] - :response-time ms')
 app.use(morgan("combined"));
 app.use(express.json());
-app.use(bodyParsr.urlencoded({ extended: true }));
-app.use(bodyParsr.json({ extended: true }));
+app.use(bodyParsr.urlencoded({extended:true}))
+app.use(bodyParsr.json({extended:true}))
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', 'https://watch-ecomm-frontend.onrender.com/');
 //     next();
 //   });
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://watch-ecommerce-mern-project.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 // const whitelist = ["https://watch-ecomm-frontend.onrender.com/"]
 // const corsOptions = {

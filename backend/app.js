@@ -17,9 +17,10 @@ app.use(bodyParsr.json({extended:true}))
 //   });
 app.use(
   cors({
-    origin: ["https://watch-ecommerce-mern-project.vercel.app/"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: true,
+    methods: ["POST"],
     credentials: true,
+    maxAge: 3600
   })
 );
 

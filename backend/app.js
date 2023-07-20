@@ -9,19 +9,13 @@ const bodyParsr = require("body-parser");
 // morgan(':method :url :status :res[content-length] - :response-time ms')
 app.use(morgan("combined"));
 app.use(express.json());
-app.use(bodyParsr.urlencoded({extended:true}))
-app.use(bodyParsr.json({extended:true}))
+app.use(bodyParsr.urlencoded({ extended: true }));
+app.use(bodyParsr.json({ extended: true }));
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', 'https://watch-ecomm-frontend.onrender.com/');
 //     next();
 //   });
-app.use(
-  cors({
-    origin: [`${process.env.FRONTEND_URL}`],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 // const whitelist = ["https://watch-ecomm-frontend.onrender.com/"]
 // const corsOptions = {

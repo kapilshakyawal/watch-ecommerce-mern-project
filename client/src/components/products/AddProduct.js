@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Nav from "../Nav";
 import { errorToast, successToast } from "../Toast/Toasts";
+
+
 let srcData;
 const AddProduct = () => {
+  
   const [Value, setValue] = useState({
     title: "",
     color: "",

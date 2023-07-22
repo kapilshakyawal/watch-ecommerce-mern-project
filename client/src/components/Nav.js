@@ -1,16 +1,34 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Auth } from "../Auth";
-import { successToast } from "./Toast/Toasts";
-// bg-slate-900
+import { infoToast } from "./Toast/Toasts";
+
 const Nav = () => {
   const [navbar, setNavbar] = useState(false);
-  const navigate = useNavigate()
-const Logout = () => {
-    localStorage.removeItem("token")
-    successToast("Logout Successfully!")
-    navigate("/")
-}
+  const navigate = useNavigate();
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      // "Access-Control-Allow-Origin": "http://localhost:7000/",
+      "Access-Control-Allow-Credentials": "true",
+    },
+    credentials: "include",
+  };
+  const Logout = async () => {
+    await fetch(`${window.BACKEND_URL}logout`,requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(JSON.stringify(data));
+
+        localStorage.removeItem("ROLE");
+        localStorage.removeItem("token");
+        infoToast("Logout Successfully!");
+        navigate("/")
+      });
+    // navigate("/");
+  };
   return (
     <nav className="shadow  bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
@@ -79,16 +97,17 @@ const Logout = () => {
             </ul>
             {Auth() ? (
               <div className="mt-3 space-y-2 lg:hidden md:inline-block">
-                <Link onClick={Logout}
-                  to="/"
+                <button
+                  onClick={Logout}
+                  // to="/"
                   className="inline-block w-full px-4 py-2 text-center text-blue-800 bg-white rounded-md shadow hover:bg-gray-100 font-bold"
                 >
                   Logout
-                </Link>
+                </button>
               </div>
             ) : (
               <div className="mt-3 space-y-2 lg:hidden md:inline-block">
-                <Link 
+                <Link
                   to="/login"
                   className="inline-block w-full px-4 py-2 text-center text-white bg-blue-700 rounded-md shadow hover:bg-gray-800 font-bold"
                 >
@@ -107,12 +126,13 @@ const Logout = () => {
 
         {Auth() ? (
           <div className="hidden space-x-2 md:inline-block">
-            <Link onClick={Logout}
-              to="/"
+            <button
+              onClick={Logout}
+              // to="/"
               className="px-4 py-2 text-blue-800 bg-white rounded-md shadow hover:bg-slate-600 hover:text-white font-bold"
             >
               Logout
-            </Link>
+            </button>
           </div>
         ) : (
           <div className="hidden space-x-2 md:inline-block">

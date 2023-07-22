@@ -2,9 +2,9 @@ const ProductModel = require("../models/ProductModel");
 
 exports.addProduct = async (req, res) => {
   const { title, description, color, brand, price, file } = req.body;
-  //   if (!title || !description || !color || !brand || !price) {
-  //     return res.send({"message":"please fill the proper details of product."});
-  //   }
+    // if (!title || !description || !color || !brand || !price) {
+    //   return res.send({"message":"please fill the proper details of product.",success: false });
+    // }
 
   console.log("FIle ", file);
   const product = await ProductModel.create({

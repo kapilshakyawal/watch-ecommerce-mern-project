@@ -3,31 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Nav from "./Nav";
 import { errorToast, successToast } from "./Toast/Toasts";
 let result;
-
-// const successToast = () => {
-//   return toast.success("Login Successfully", {
-//     position: "top-right",
-//     autoClose: 1000,
-//     hideProgressBar: false,
-//     closeOnClick: true,
-//     pauseOnHover: true,
-//     draggable: true,
-//     progress: undefined,
-//     theme: "dark",
-//     })
-// }
-// const errorToast = () => {
-//   return toast.error("Internal Server Error",{
-//     position: "top-right",
-//     autoClose: 1000,
-//     hideProgressBar: false,
-//     closeOnClick: true,
-//     pauseOnHover: true,
-//     draggable: true,
-//     progress: undefined,
-//     theme: "dark",
-//     })
-// }
 const Login = () => {
   const navigate = useNavigate();
   const [Value, setValue] = useState({
@@ -36,8 +11,6 @@ const Login = () => {
   });
   const handleChanges = (e) => {
     setValue({ ...Value, [e.target.name]: e.target.value });
-    // console.log({[e.target.name] : e.target.value})
-    console.log(Value);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,31 +19,35 @@ const Login = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        Accept: "application/json",
         // "Access-Control-Allow-Origin": "http://localhost:7000/",
         "Access-Control-Allow-Credentials": "true",
       },
       credentials: "include",
       body: JSON.stringify(Value),
     };
-    console.log("start");
     await fetch(`${window.BACKEND_URL}login`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(JSON.stringify(data));
-        console.log(data.success);
         result = data;
         if (data.token) {
           localStorage.setItem("token", data.token);
+          localStorage.setItem("ROLE", data.ROLE);
+          // if (data.ROLE === "BUYER") {
+          //   return navigate("/user/buyer-landing-page");
+          // }
+          // return navigate("/user/seller-landing-page");
         }
       });
     if (result.success) {
       successToast("Login successfully");
-      navigate("/");
+      localStorage.getItem("ROLE") === "BUYER"
+        ? navigate("/user/buyer-landing-page")
+        : navigate("/user/seller-landing-page");
+      // navigate("/");
     } else {
       errorToast("Internal Server Error!");
     }
-    console.log("end");
   };
 
   return (
@@ -149,7 +126,7 @@ const Login = () => {
               Login to your account
             </button>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-              Not registered?{" "}
+              Not registered?
               <Link
                 to="/signup"
                 className="text-blue-700 hover:underline dark:text-blue-500"

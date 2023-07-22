@@ -12,6 +12,11 @@ const userModel = mongoose.Schema(
     },
     token :{
       type:String
+    },
+    role:{
+    type:String,
+     enum : ["SELLER","BUYER"],
+     default:"USER"
     }
   },
   { timestamps: true }

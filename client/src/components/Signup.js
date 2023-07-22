@@ -4,16 +4,18 @@ import Nav from "./Nav";
 import { errorToast, successToast } from "./Toast/Toasts";
 let result;
 const Signup = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [Value, setValue] = useState({
     fullName: "",
     email: "",
     password: "",
+    role: "",
   });
   const handleChanges = (e) => {
+    // console.log({[e.target.name]: e.target.value })
     setValue({ ...Value, [e.target.name]: e.target.value });
     // console.log({[e.target.name] : e.target.value})
-    console.log(Value);
+    // console.log(Value);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ const Signup = () => {
         console.log(data);
       });
     if (result.success) {
-      navigate("/login")
+      navigate("/login");
       successToast("Signup Successfully! Please Login.");
     } else {
       errorToast("Internal Server Error!");
@@ -97,6 +99,23 @@ const Signup = () => {
                 required
               />
             </div>
+
+            <label
+              htmlFor="countries"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Select a Role
+            </label>
+            <select
+              onChange={handleChanges} name="role"
+              id="countries"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option selected>Choose a role</option>
+              <option value="SELLER">SELLER</option>
+              <option value="BUYER">BUYER</option>
+            </select>
+
             <div className="flex items-start">
               <div className="flex items-start">
                 <div className="flex items-center h-5">

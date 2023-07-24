@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Auth } from "../Auth";
+
+import Popups from "./popups/Popups";
 import { infoToast } from "./Toast/Toasts";
 
 const Nav = () => {
   const [navbar, setNavbar] = useState(false);
+  const [Popup, setPopup] = useState(false);
   const navigate = useNavigate();
   const requestOptions = {
     method: "GET",
@@ -17,16 +20,19 @@ const Nav = () => {
     credentials: "include",
   };
   const Logout = async () => {
+
     await fetch(`${window.BACKEND_URL}logout`,requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(JSON.stringify(data));
-
+        setPopup(true);
+        <Popups />;
         localStorage.removeItem("ROLE");
         localStorage.removeItem("token");
         infoToast("Logout Successfully!");
         navigate("/")
       });
+      setPopup(false)
     // navigate("/");
   };
   return (
@@ -97,13 +103,17 @@ const Nav = () => {
             </ul>
             {Auth() ? (
               <div className="mt-3 space-y-2 lg:hidden md:inline-block">
-                <button
-                  onClick={Logout}
-                  // to="/"
-                  className="inline-block w-full px-4 py-2 text-center text-blue-800 bg-white rounded-md shadow hover:bg-gray-100 font-bold"
-                >
-                  Logout
-                </button>
+                {Popup ? (
+                  <Popups />
+                ) : (
+                  <button
+                    onClick={Logout}
+                    // to="/"
+                    className="inline-block w-full px-4 py-2 text-center text-blue-800 bg-white rounded-md shadow hover:bg-gray-100 font-bold"
+                  >
+                    Logout
+                  </button>
+                )}
               </div>
             ) : (
               <div className="mt-3 space-y-2 lg:hidden md:inline-block">
@@ -126,13 +136,17 @@ const Nav = () => {
 
         {Auth() ? (
           <div className="hidden space-x-2 md:inline-block">
-            <button
-              onClick={Logout}
-              // to="/"
-              className="px-4 py-2 text-blue-800 bg-white rounded-md shadow hover:bg-slate-600 hover:text-white font-bold"
-            >
-              Logout
-            </button>
+            {Popup ? (
+              <Popups />
+            ) : (
+              <button
+                onClick={Logout}
+                // to="/"
+                className="inline-block w-full px-4 py-2 text-center text-blue-800 bg-white rounded-md shadow hover:bg-gray-100 font-bold"
+              >
+                Logout
+              </button>
+            )}
           </div>
         ) : (
           <div className="hidden space-x-2 md:inline-block">

@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from "./Nav";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Popups from "./popups/Popups";
+import { Auth } from "../Auth";
 
 const Home = () => {
+  const role = localStorage.getItem("ROLE");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (role === "BUYER") {
+      navigate("/user/buyer-landing-page");
+    } else if (role === "SELLER") {
+      navigate("/user/seller-landing-page");
+    } else {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <>
       <Nav />
@@ -18,7 +31,7 @@ const Home = () => {
               BUY AND SELL
             </p>
             <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
-            A online platform for the buyers and sellers.
+              A online platform for the buyers and sellers.
             </p>
             <Link
               to="/login"

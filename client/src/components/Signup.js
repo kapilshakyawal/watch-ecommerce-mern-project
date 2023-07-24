@@ -4,7 +4,7 @@ import Nav from "./Nav";
 import { errorToast, successToast } from "./Toast/Toasts";
 let result;
 const Signup = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [Value, setValue] = useState({
     fullName: "",
     email: "",
@@ -25,6 +25,7 @@ const Signup = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(Value),
     };
+    console.log(requestOptions)
     await fetch(`${window.BACKEND_URL}signup`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
@@ -38,6 +39,7 @@ const Signup = () => {
       errorToast("Internal Server Error!");
     }
   };
+  console.log(Value)
 
   return (
     <>

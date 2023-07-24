@@ -39,7 +39,7 @@ app.use(
 
 app.use(cookieParser());
 mongoose
-  .connect(process.env.LOCAL_DB, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Db is connected successfully...");
     // If connection is successful, start the server.

@@ -26,6 +26,7 @@ const Login = () => {
       credentials: "include",
       body: JSON.stringify(Value),
     };
+    console.log(requestOptions)
     await fetch(`${window.BACKEND_URL}login`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
@@ -39,6 +40,8 @@ const Login = () => {
           // return navigate("/user/seller-landing-page");
         }
       });
+
+      console.log(Value)
     if (result.success) {
       successToast("Login successfully");
       localStorage.getItem("ROLE") === "BUYER"

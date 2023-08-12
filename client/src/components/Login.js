@@ -28,7 +28,7 @@ const Login = () => {
       credentials: "include",
       body: JSON.stringify(Value),
     };
-    console.log(requestOptions);
+    // console.log(requestOptions);
     setLoading(true)
     await fetch(`${window.BACKEND_URL}login`, requestOptions)
       .then((response) => response.json())
@@ -44,7 +44,7 @@ const Login = () => {
         }
       });
 
-    console.log(Value);
+    // console.log(Value);
     if (result.success) {
       successToast("Login successfully");
       setLoading(false)

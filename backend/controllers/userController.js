@@ -38,7 +38,6 @@ exports.login = async (req, res) => {
     return res.send({ message: "Fill the form properly.", success: false });
   }
   const checkUser = await userModel.findOne({ email });
-  console.log(checkUser);
   if (checkUser) {
     bcrypt.compare(password, checkUser.password, function (err, result) {
       if (result) {
@@ -74,7 +73,8 @@ exports.login = async (req, res) => {
 
 
 exports.logout = async(req,res) => {
-  res.clearCookie('ROLE').clearCookie("token").redirect("/")
+  res.clearCookie('ROLE').clearCookie("token")
+  res.send({"message":"Logout successfully"})
 }
 
 exports.getUser = async (req, res) => {

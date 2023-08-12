@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Loader } from "../../loader/Loading";
 const Card = () => {
   const [Data, setData] = useState([]);
+  const [Loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Function to fetch data from the server
     const fetchData = async () => {
       try {
+        setLoading(true)
         const response = await fetch(`${window.BACKEND_URL}get/product/list`); // Replace the URL with your API endpoint
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const jsonData = await response.json();
+        setLoading(false)
         setData(jsonData.products); // Update the state with the fetched data
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -27,7 +31,7 @@ const Card = () => {
   }, []);
   return (
       <>
-      {Data.map((item) => (
+      {Loading ? <Loader /> : Data.map((item) => (
           <div key={item._id} className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-full max-w-xs m-2">
           <Link to="">
             <img className="p-4 rounded-t-lg" src={item.file} alt="product" />

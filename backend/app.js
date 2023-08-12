@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParsr = require("body-parser");
 // morgan(':method :url :status :res[content-length] - :response-time ms')
-app.use(morgan("combined"));
+app.use(morgan("tiny"));
 app.use(express.json());
 app.use(bodyParsr.urlencoded({extended:true}))
 app.use(bodyParsr.json({extended:true}))

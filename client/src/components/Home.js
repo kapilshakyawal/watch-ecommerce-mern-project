@@ -8,6 +8,8 @@ const Home = () => {
   const role = localStorage.getItem("ROLE");
   const navigate = useNavigate();
   useEffect(() => {
+    console.log(role === "BUYER")
+    console.log(role === "SELLER")
     if (role === "BUYER") {
       navigate("/user/buyer-landing-page");
     } else if (role === "SELLER") {

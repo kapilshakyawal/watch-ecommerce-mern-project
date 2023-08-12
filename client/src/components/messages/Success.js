@@ -18,7 +18,7 @@ const Success = () => {
       {/* // <!-- Main modal --> */}
       <div
         id="successModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-hidden="true"
         className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full"
       >

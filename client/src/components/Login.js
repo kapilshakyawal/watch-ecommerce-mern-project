@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "./Nav";
 import { errorToast, successToast } from "./Toast/Toasts";
+import { Loader } from "../loader/Loading";
 let result;
 const Login = () => {
   const navigate = useNavigate();
+  const [Loading, setLoading] = useState(false);
   const [Value, setValue] = useState({
     email: "",
     password: "",
@@ -26,7 +28,8 @@ const Login = () => {
       credentials: "include",
       body: JSON.stringify(Value),
     };
-    console.log(requestOptions)
+    console.log(requestOptions);
+    setLoading(true)
     await fetch(`${window.BACKEND_URL}login`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
@@ -41,9 +44,10 @@ const Login = () => {
         }
       });
 
-      console.log(Value)
+    console.log(Value);
     if (result.success) {
       successToast("Login successfully");
+      setLoading(false)
       localStorage.getItem("ROLE") === "BUYER"
         ? navigate("/user/buyer-landing-page")
         : navigate("/user/seller-landing-page");
@@ -64,7 +68,7 @@ const Login = () => {
             </h5>
             <div>
               <label
-                for="email"
+                htmlFor="email"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Your email
@@ -81,7 +85,7 @@ const Login = () => {
             </div>
             <div>
               <label
-                for="password"
+                htmlFor="password"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Your password
@@ -108,7 +112,7 @@ const Login = () => {
                   />
                 </div>
                 <label
-                  for="remember"
+                  htmlFor="remember"
                   className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
                   Remember me
@@ -121,12 +125,13 @@ const Login = () => {
                 Lost Password?
               </Link>
             </div>
+
             <button
               onClick={handleSubmit}
               type="submit"
               className="w-full text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focusLink ing-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
             >
-              Login to your account
+              {Loading ? <Loader /> : "Login to your account"}
             </button>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
               Not registered?

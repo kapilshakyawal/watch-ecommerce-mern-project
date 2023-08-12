@@ -33,6 +33,8 @@ function App() {
           <Route exact path="seller-landing-page" element={<SellerLandingPage />} />
           <Route exact path="buyer-landing-page" element={<BuyerLandingPage />} />
         </Route>
+        {/* <Route exact path="" element={<PrivateRoute />}>
+        </Route> */}
       </Routes>
     </>
   );

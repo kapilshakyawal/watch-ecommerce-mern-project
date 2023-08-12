@@ -40,8 +40,6 @@ exports.login = async (req, res) => {
   const checkUser = await userModel.findOne({ email });
   console.log(checkUser);
   if (checkUser) {
-    console.log("Login");
-    console.log("B");
     bcrypt.compare(password, checkUser.password, function (err, result) {
       if (result) {
         const token = genToken(checkUser.email);

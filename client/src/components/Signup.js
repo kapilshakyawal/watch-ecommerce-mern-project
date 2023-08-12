@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "./Nav";
 import { errorToast, successToast } from "./Toast/Toasts";
+import { Loader } from "../loader/Loading";
 let result;
 const Signup = () => {
   const navigate = useNavigate()
+  const [Loading, setLoading] = useState(false);
+
   const [Value, setValue] = useState({
     fullName: "",
     email: "",
@@ -26,6 +29,7 @@ const Signup = () => {
       body: JSON.stringify(Value),
     };
     console.log(requestOptions)
+    setLoading(true)
     await fetch(`${window.BACKEND_URL}signup`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
@@ -33,6 +37,7 @@ const Signup = () => {
         console.log(data);
       });
     if (result.success) {
+      setLoading(false)
       navigate("/login");
       successToast("Signup Successfully! Please Login.");
     } else {
@@ -52,7 +57,7 @@ const Signup = () => {
             </h5>
             <div>
               <label
-                for="fullName"
+                htmlFor="fullName"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Name
@@ -69,7 +74,7 @@ const Signup = () => {
             </div>
             <div>
               <label
-                for="email"
+                htmlFor="email"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Email
@@ -86,7 +91,7 @@ const Signup = () => {
             </div>
             <div>
               <label
-                for="password"
+                htmlFor="password"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Your password
@@ -130,7 +135,7 @@ const Signup = () => {
                   />
                 </div>
                 <label
-                  for="remember"
+                  htmlFor="remember"
                   className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
                   Remember me
@@ -144,7 +149,8 @@ const Signup = () => {
               className="w-full text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focusLink ing-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray
 gray-700 dark:focus:ring-blue-800"
             >
-              Create Account
+             {Loading ? <Loader /> : "Create Account"}
+              
             </button>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
               Already registered?{" "}

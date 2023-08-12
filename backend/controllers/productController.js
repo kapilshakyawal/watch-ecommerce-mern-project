@@ -5,9 +5,8 @@ exports.addProduct = async (req, res) => {
     // if (!title || !description || !color || !brand || !price) {
     //   return res.send({"message":"please fill the proper details of product.",success: false });
     // }
-
-  console.log("FIle ", file);
   const product = await ProductModel.create({
+    user:req.user._id,
     title,
     description,
     color,
@@ -31,7 +30,6 @@ exports.addProduct = async (req, res) => {
 };
 
 exports.getProducts = async (req, res) => {
-  console.log("A");
   const products = await ProductModel.find({});
   if (!products)
     return res.send({
